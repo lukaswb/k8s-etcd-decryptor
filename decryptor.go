@@ -33,13 +33,14 @@ func main() {
 	s := string(v)[21:]
 	fmt.Println(v[0:30])
 
-	if s[2] != "aescbc" {
-		fmt.Printf("Secret is not CBC-encrypted: %v\n", s[2])
-		os.Exit(1)
-	}
+	// if s[2] != "aescbc" {
+	// 	fmt.Printf("Secret is not CBC-encrypted: %v\n", s[2])
+	// 	os.Exit(1)
+	// }
 
 	// Get binary data as bytes
-	secret := []byte(s[5])
+	//secret := []byte(s[5])
+	secret := []byte(s)
 
 	fmt.Print("Enter base64-encoded encryption key from EncryptionConfig: ")
 	reader = bufio.NewReader(os.Stdin)
