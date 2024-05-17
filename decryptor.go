@@ -22,6 +22,14 @@ func main() {
 		fmt.Printf("Error reading input: %v", err)
 		os.Exit(1)
 	}
+	fmt.Println("b: ", b)
+	// fix padding
+	mod := len(b) % 4
+	trimLen := len(b) - mod
+	res := b[0:trimLen]
+	fmt.Println("Trimmed b:", res)
+	b = res
+	
 	v, err := base64.StdEncoding.DecodeString(b)
 	if err != nil {
 		fmt.Printf("Failed to decode etcd value: %v\n", err)
