@@ -7,7 +7,6 @@ import (
 	"encoding/base64"
 	"fmt"
 	"os"
-	"strings"
 
 	"k8s.io/apiserver/pkg/storage/value"
 	aestransformer "k8s.io/apiserver/pkg/storage/value/encrypt/aes"
@@ -31,12 +30,9 @@ func main() {
 
 	// Decoded string looks like this: "k8s:enc:aescbc:v1:<provider-name>:<binary-aes-encrypted-data>"
 	// "<binary-aes-encrypted-data>" := "<32-bit IV><rest-of-data>"
-	s := strings.Split(string(v), ":")
+	s := string(v)[21:]
+	fmt.Println(v[0:30])
 
-	if len(s) != 6 {
-		fmt.Printf("Value does not have the right format: %v", s)
-		os.Exit(1)
-	}
 	if s[2] != "aescbc" {
 		fmt.Printf("Secret is not CBC-encrypted: %v\n", s[2])
 		os.Exit(1)
