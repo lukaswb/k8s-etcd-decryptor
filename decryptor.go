@@ -29,7 +29,7 @@ func main() {
 	res := b[0:trimLen]
 	fmt.Println("Trimmed b:", res)
 	b = res
-	
+
 	v, err := base64.StdEncoding.DecodeString(b)
 	if err != nil {
 		fmt.Printf("Failed to decode etcd value: %v\n", err)
@@ -39,6 +39,7 @@ func main() {
 	// Decoded string looks like this: "k8s:enc:aescbc:v1:<provider-name>:<binary-aes-encrypted-data>"
 	// "<binary-aes-encrypted-data>" := "<32-bit IV><rest-of-data>"
 	s := string(v)[21:]
+	fmt.Println("s: ", s)
 	fmt.Println(v[0:30])
 
 	// if s[2] != "aescbc" {
